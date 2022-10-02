@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import  {Exchange}  from './components/Exchange';
 import { Header } from './components/Header';
-import './index.scss';
+import './scss/index.scss';
 
 
 function App() {
