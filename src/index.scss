@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+
+body {
+  background-color: #d7edcee5;
+  margin: 0 auto;
+  overflow-x:hidden;
+}
+
+* {
+  font-family: 'Inter', system-ui !important;
+  box-sizing: border-box;
+
+}
+.header {
+  background-color: #3fa8ac;
+  width: 100%;
+  display: flex;
+  padding: 10px 15px;
+  p {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+    margin-left: 10px;
+    font-size: 1.3rem;
+    color:  white;
+  }
+  svg {
+    margin-right: 15px;
+  }
+
+}
+
+.exchange {
+  margin: 50px auto ;
+  background-color: #fff;
+  padding: 30px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  
+  input {
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    font-size: 2.5rem;
+    padding: 20px 20px;
+    letter-spacing: 1.3px;
+    outline: none;
+    margin-top: 20px;
+    border-radius: 30px;
+    
+  }
+}
+
+.currencies {
+  select {
+    display: flex;
+    padding: 5px 10px;
+    margin: 0 ;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    width: 100px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    cursor: pointer;
+    font-size: 20px;
+    border: 2px solid #566b4e22 ;
+    color: black;
+    &:focus-visible {
+      outline: none;
+     
+    }
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@media screen and (max-width: 720px) {
+  .header {
+    padding: 10px 13px;
+    justify-content: space-between;
+    p {
+      margin-right: 10px;
+      margin-left: 10px;
+      font-size: 1rem;
+      color:  white;
+    }
+    svg {
+      margin-right: 10px;
+    }
+  }
+  .exchange {
+    margin: 50px auto;
+    width: 90%;
+  }
+}
