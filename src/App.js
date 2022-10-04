@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import  {Exchange}  from './components/Exchange';
-import { Header } from './components/Header';
+import Exchange from './components/Exchange';
+import Header from './components/Header';
+import useFetch from './components/hooks/useFetch'
+import Currency from './components/Currency';
 import './scss/index.scss';
 
 
 function App() {
+
+  const {course} = useFetch('https://cdn.cur.su/api/nbu.json')
 
   const [firstCurrency, setFirstCurrency] = useState('UAH')
   const [secondCurrency, setSecondCurrency] = useState('USD')
@@ -12,20 +16,6 @@ function App() {
   const [firstPrice, setFirstPrice] = useState()
   const [secondPrice, setSecondPrice] = useState()
 
-  const [course, setCourse] = useState({})
-
-  const [ifValueDownload, setIfValueDownload] = useState(false)
-
-  useEffect(() => {
-    setIfValueDownload(true)
-    fetch("https://cdn.cur.su/api/nbu.json")
-      .then(response => response.json())
-      .then(json => {
-        setCourse(json.rates)
-      })
-      .catch(err => console.log(err))
-    setIfValueDownload(false)
-  }, [])
   
   const changeFirstNumber = (value) => {
     const price = value / course[firstCurrency]
@@ -38,16 +28,16 @@ function App() {
     setSecondPrice(value)
     setFirstPrice(result.toFixed(2))
   }
-
+  
   const changeFirstInput = (cur) => {
     setFirstCurrency(cur)
     changeFirstNumber (firstPrice)
   }
-
+  
   useEffect(() => {
     changeFirstNumber(firstPrice);
   }, [firstCurrency])
-
+  
   useEffect(() => {
     changeSecondNumber(secondPrice);
   }, [secondCurrency])
@@ -55,28 +45,36 @@ function App() {
   const currentUSD = Number(course.UAH)
   const currentEUR = Number(course.UAH / course.EUR * course.USD)
   const currentGBP = Number(course.UAH / course.GBP * course.USD)
-
+  
   return (
     <div className="App">
       <Header 
-        headerUSD = {isNaN(currentUSD.toFixed(2)) ? '...' : currentUSD.toFixed(2)} 
-        headerEUR = {isNaN(currentEUR.toFixed(2)) ? '...' : currentEUR.toFixed(2)} 
-        headerGBP = {isNaN(currentGBP.toFixed(2)) ? '...' : currentGBP.toFixed(2)} 
+        headerUSD = {isNaN(currentUSD) ? '...' : currentUSD.toFixed(2)} 
+        headerEUR = {isNaN(currentEUR) ? '...' : currentEUR.toFixed(2)} 
+        headerGBP = {isNaN(currentGBP) ? '...' : currentGBP.toFixed(2)} 
         />
-      <Exchange 
-        value={firstPrice} 
-        currency={firstCurrency} 
-        onChangeCurrency={(cur) => changeFirstInput(cur)}
-        onChangeValue = {changeFirstNumber}
-        defaultCurrencies = {['UAH', 'USD', 'EUR', 'GBP']}
+      <div className='exchange'>
+        <Currency 
+          onChangeCurrency={(cur) => changeFirstInput(cur)}
+          defaultCurrencies = {['UAH', 'USD', 'EUR', 'GBP']}
         />
-      <Exchange 
-        value={secondPrice} 
-        currency={secondCurrency} 
-        onChangeCurrency={(cur) => setSecondCurrency(cur)}
-        onChangeValue = {changeSecondNumber}
-        defaultCurrencies = {['USD', 'UAH', 'EUR', 'GBP']}
-      />
+        <Exchange 
+          value={firstPrice} 
+          currency={firstCurrency} 
+          onChangeValue = {changeFirstNumber}
+        />
+      </div>
+      <div className='exchange'>
+        <Currency 
+          onChangeCurrency={(cur) => changeFirstInput(cur)}
+          defaultCurrencies = {['UAH', 'USD', 'EUR', 'GBP']}
+        />
+        <Exchange 
+          value={secondPrice} 
+          currency={secondCurrency} 
+          onChangeValue = {changeSecondNumber}
+        />
+      </div>
     </div>
   )
 }

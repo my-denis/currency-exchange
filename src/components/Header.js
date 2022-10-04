@@ -1,4 +1,4 @@
-export function Header ({headerUSD, headerEUR, headerGBP}) {
+function Header ({headerUSD, headerEUR, headerGBP}) {
 
   return(
     <header className="header">
@@ -12,3 +12,4 @@ export function Header ({headerUSD, headerEUR, headerGBP}) {
     </header>
   )
 }
+export default Header
