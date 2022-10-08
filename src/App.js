@@ -67,7 +67,7 @@ function App() {
       <div className='exchange'>
         <Currency 
           onChangeCurrency={(cur) => changeFirstInput(cur)}
-          defaultCurrencies = {['USD', 'USD', 'EUR', 'GBP']}
+          defaultCurrencies = {['USD', 'UAH', 'EUR', 'GBP']}
         />
         <Exchange 
           value={secondPrice} 
