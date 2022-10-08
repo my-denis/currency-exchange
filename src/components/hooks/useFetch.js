@@ -1,13 +1,13 @@
 import {useState, useEffect} from 'react'
 
 const useFetch = (url, options) => {
-    const [course, setCourse1] = useState({})
+    const [course, setCourse] = useState({})
 
     function fetchNow(url, options) {
         fetch(url, options)
             .then((res) => res.json())
             .then((res) => {
-                setCourse1(res.rates)
+                setCourse(res.rates)
             })
             .catch((error) => {
                 console.log(error);
